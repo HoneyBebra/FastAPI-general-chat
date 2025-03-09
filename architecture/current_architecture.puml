@@ -1,0 +1,15 @@
+@startuml
+actor User
+component NginxGateway
+
+package "general-chat" {
+component NginxGeneralChat
+component FastApiApp
+database PostgreSQL
+}
+
+User -> NginxGateway
+NginxGateway -> NginxGeneralChat
+NginxGeneralChat -> FastApiApp
+FastApiApp - PostgreSQL
+@enduml

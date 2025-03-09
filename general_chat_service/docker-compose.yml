@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  general-chat:
+    container_name: general-chat
+    image: general-chat
+    restart: always
+    env_file:
+      - .env
+    build: .
+
+  nginx-general-chat:
+    container_name: nginx-general-chat
+    image: nginx:1.25.5
+    restart: always
+    volumes:
+      - ./infra/configs/nginx-general-chat/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./infra/configs/nginx-general-chat/site.conf:/etc/nginx/conf.d/site.conf:ro
+    # ports:
+    #   - "80:80"
+
+  postgres:
+    image: postgres:17.4
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ${VOLUMES}:/var/lib/postgresql/data
+    # ports:
+    #   - "5432:5432"
