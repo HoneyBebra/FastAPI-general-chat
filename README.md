@@ -37,6 +37,8 @@ My chat based on the [article](https://habr.com/ru/companies/amvera/articles/846
    docker-compose up -d
    ```
 
+5. Apply migrations
+
 # Architecture
 
 ![GDD][Current-architecture-url]
