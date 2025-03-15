@@ -2,9 +2,9 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
-from src.api.v1.main import router as api_v1_router
-from src.core.config import settings
-from src.core.logger import LOGGING
+from .api.v1.main import router as api_v1_router
+from .core.config import settings
+from .core.logger import LOGGING
 
 app = FastAPI(
     title=settings.app_name,

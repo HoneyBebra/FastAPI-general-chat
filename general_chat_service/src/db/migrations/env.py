@@ -6,8 +6,8 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from src.core.config import settings  # NEW
-from src.models import Base  # NEW
+from ...core.config import settings  # NEW
+from ...models import Base  # NEW
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.postgres_dsn)  # NEW

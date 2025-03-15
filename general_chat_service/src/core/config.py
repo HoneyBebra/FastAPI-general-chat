@@ -5,7 +5,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from src.core.logger import LOGGING
+from ..core.logger import LOGGING
 
 load_dotenv()
 
