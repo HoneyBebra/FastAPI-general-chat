@@ -1,3 +1,4 @@
+from datetime import timezone
 from functools import lru_cache
 from logging import config as logging_config
 from pathlib import Path
@@ -26,6 +27,10 @@ class Settings(BaseSettings):
 
     # These parameters also need to be changed in the nginx and docker settings
     api_v1_prefix: str = "/api/v1"
+
+    access_token_minutes: int = 30
+
+    current_timezone: timezone = timezone.utc
 
     postgres_user: str = "user"
     postgres_password: str = "password"
