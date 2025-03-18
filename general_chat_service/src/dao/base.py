@@ -31,7 +31,7 @@ class BaseDAO:
     async def find_all(self, **filter_by: Any) -> Sequence:
         query = select(self.model).filter_by(**filter_by)
         result = await self.session.execute(query)
-        return result.scalars().all()
+        return result.scalars().all()  # type: ignore[return-value]
 
     async def add(self, **values: Any):  # type: ignore[no-untyped-def]
         async with self.session.begin():
