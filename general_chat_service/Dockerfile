@@ -15,6 +15,8 @@ COPY requirements.txt ./
 RUN  python3 -m pip install -r requirements.txt
 
 COPY src src
+COPY static static
+COPY templates templates
 
 RUN  groupadd -r ${APP_GROUP} && \
      useradd -d ${APP_DIR} -r -g ${APP_GROUP} ${APP_USER} && \

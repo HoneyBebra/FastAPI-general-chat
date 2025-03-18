@@ -40,6 +40,12 @@ class Settings(BaseSettings):
 
     postgres_echo: bool = True
 
+    static_path: str = "../static"
+
+    middleware_allow_origins: str = "*"
+    middleware_allow_methods: str = "*"
+    middleware_allow_headers: str = "*"
+
     @property
     def postgres_dsn(self) -> str:
         return (
