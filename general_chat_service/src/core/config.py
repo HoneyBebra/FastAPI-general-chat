@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     # These parameters also need to be changed in the nginx and docker settings
-    api_v1_prefix: str = "/api/v1"
+    api_v1_prefix: str = "/v1"
 
     access_token_minutes: int = 30
 
