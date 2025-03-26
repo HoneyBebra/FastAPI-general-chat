@@ -11,6 +11,10 @@ class SBaseAuth(BaseModel):
     )
 
 
+class SBaseAuthResponse(BaseModel):
+    message: str = Field(description="Response message")
+
+
 class SUserRegister(SBaseAuth):
     password_check: str = Field(
         ...,
@@ -26,5 +30,6 @@ class SUserRegister(SBaseAuth):
     )
 
 
-class SUserAuth(SBaseAuth):
-    pass
+class SLoginResponse(SBaseAuthResponse):
+    access_token: str
+    refresh_token: str | None
