@@ -5,7 +5,7 @@ class TokenExpiredException(HTTPException):
     def __init__(self) -> None:
         super().__init__(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Токен истек",
+            detail="Token expired",
         )
 
 
@@ -13,41 +13,49 @@ class TokenNoFoundException(HTTPException):
     def __init__(self) -> None:
         super().__init__(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Токен не найден",
+            detail="Token not found",
         )
 
 
 UserAlreadyExistsException = HTTPException(
     status_code=status.HTTP_409_CONFLICT,
-    detail="Пользователь уже существует",
+    detail="User already exists",
 )
 
 PasswordMismatchException = HTTPException(
     status_code=status.HTTP_409_CONFLICT,
-    detail="Пароли не совпадают!",
+    detail="The passwords do not match",
 )
 
 IncorrectEmailOrPasswordException = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
-    detail="Неверная почта или пароль",
+    detail="Incorrect email or password",
 )
 
 NoJwtException = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
-    detail="Токен не валидный!",
+    detail="The token is not valid",
 )
 
 NoUserIdException = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
-    detail="Не найден ID пользователя",
+    detail="User ID not found",
 )
 
 ForbiddenException = HTTPException(
     status_code=status.HTTP_403_FORBIDDEN,
-    detail="Недостаточно прав!",
+    detail="Insufficient rights",
 )
 
 UserNotFoundException = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
-    detail="Пользователь не найден",
+    detail="User not found",
+)
+
+AuthorizationHeaderMissingException = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED, detail="Authorization header missing"
+)
+
+InvalidAuthenticationSchemeException = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid authentication scheme"
 )
