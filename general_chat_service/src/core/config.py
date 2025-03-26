@@ -46,6 +46,9 @@ class Settings(BaseSettings):
     middleware_allow_methods: str = "*"
     middleware_allow_headers: str = "*"
 
+    secret_key: str = "super_secret"
+    encryption_algorithm: str = "super_algorithm"
+
     @property
     def postgres_dsn(self) -> str:
         return (

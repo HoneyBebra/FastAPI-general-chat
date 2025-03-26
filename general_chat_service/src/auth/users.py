@@ -6,9 +6,9 @@ from passlib.context import CryptContext
 from pydantic import EmailStr
 
 from ..core.config import settings
-from ..dao import users_dao
+from ..dao.users import UsersDAO
 
-# TODO: Add refresh tokens
+# TODO: Add refresh token
 
 
 def create_access_token(data: dict) -> str:
@@ -17,7 +17,7 @@ def create_access_token(data: dict) -> str:
         minutes=settings.access_token_minutes
     )
     to_encode.update({"exp": expire})
-    encode_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=settings.algorithm)
+    encode_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=settings.encryption_algorithm)
     return encode_jwt
 
 
@@ -32,7 +32,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 
-async def authenticate_user(email: EmailStr, password: str) -> Any:
+async def authenticate_user(email: EmailStr, password: str, users_dao: UsersDAO) -> Any:
     user = await users_dao.find_one_or_none(email=email)
     if (
         not user

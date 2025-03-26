@@ -1,18 +1,15 @@
 from typing import Any
 from uuid import UUID
 
-from fastapi import Depends
 from sqlalchemy import Sequence
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from ..db.postgres import get_session
-
 
 class BaseDAO:
     def __init__(  # type: ignore[no-untyped-def]
-        self, session: AsyncSession = Depends(get_session), model=None
+        self, session: AsyncSession, model=None
     ) -> None:
         self.session = session
 
@@ -34,12 +31,11 @@ class BaseDAO:
         return result.scalars().all()  # type: ignore[return-value]
 
     async def add(self, **values: Any):  # type: ignore[no-untyped-def]
-        async with self.session.begin():
-            new_instance = self.model(**values)
-            self.session.add(new_instance)
-            try:
-                await self.session.commit()
-            except SQLAlchemyError as Ex:
-                await self.session.rollback()
-                raise Ex
-            return new_instance
+        new_instance = self.model(**values)
+        self.session.add(new_instance)
+        try:
+            await self.session.commit()
+        except SQLAlchemyError as Ex:
+            await self.session.rollback()
+            raise Ex
+        return new_instance
