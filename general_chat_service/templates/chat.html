@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='styles/chat.css') }}">  # TODO: Add styles -->
+</head>
+<body onload="connectChat()">
+<div class="chat-container">
+    <div class="chat-area">
+        <div class="chat-header" id="chatHeader">
+            <span>Chat</span>
+            <button class="logout-button" id="logoutButton" onclick="logout()">Logout</button>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="messageInput" placeholder="Enter your message..." >
+            <button id="sendButton" >Send</button>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', path='js/chat.js') }}"></script>
+</body>
+</html>

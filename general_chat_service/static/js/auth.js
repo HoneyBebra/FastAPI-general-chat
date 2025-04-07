@@ -23,21 +23,21 @@ const sendRequest = async (url, data) => {
         const result = await response.json();
 
         if (response.ok) {
-            alert(result.message || 'Операция выполнена успешно!');
+            alert(result.message || 'The operation was completed successfully!');
             return result;
         } else {
-            alert(result.message || 'Ошибка выполнения запроса!');
+            alert(result.message || 'Request execution error');
             return null;
         }
     } catch (error) {
-        console.error("Ошибка:", error);
-        alert('Произошла ошибка на сервере');
+        console.error("Error:", error);
+        alert('An error occurred on the server');
     }
 };
 
 const handleFormSubmit = async (formType, url, fields) => {
     if (!validateForm(fields)) {
-        alert('Пожалуйста, заполните все поля.');
+        alert('Please fill in all fields');
         return;
     }
 
@@ -46,7 +46,7 @@ const handleFormSubmit = async (formType, url, fields) => {
         : {email: fields[0], name: fields[1], password: fields[2], password_check: fields[3]});
 
     if (data && formType === 'login') {
-        window.location.href = '/chat';
+        window.location.href = '/v1/chat';
     }
 };
 
@@ -68,7 +68,7 @@ document.getElementById('registerButton').addEventListener('click', async (event
     const password_check = document.querySelectorAll('#registerForm input[type="password"]')[1].value;
 
     if (password !== password_check) {
-        alert('Пароли не совпадают.');
+        alert('The passwords do not match');
         return;
     }
 

@@ -40,3 +40,8 @@ if __name__ == "__main__":
         log_config=LOGGING,
         log_level=settings.log_level,
     )
+
+    # TODO: Fix duplicate messages - visual bug
+    # TODO: Add index to DB in messages
+    # TODO: Make messages load lazy
+    # TODO: Move authorization to a separate service

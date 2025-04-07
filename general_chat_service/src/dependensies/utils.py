@@ -5,7 +5,7 @@ from uuid import UUID
 from jose import JWTError, jwt
 
 from ..core.config import settings
-from ..dao import users_dao
+from ..dao.users import UsersDAO
 from ..exceptions.exceptions import (
     NoJwtException,
     NoUserIdException,
@@ -16,7 +16,7 @@ from ..exceptions.exceptions import (
 
 async def get_payload(token: str) -> dict[str, Any]:
     try:
-        return jwt.decode(token, settings.secret_key, algorithms=settings.algorithm)
+        return jwt.decode(token, settings.secret_key, algorithms=settings.encryption_algorithm)
     except JWTError as Ex:
         raise NoJwtException from Ex
 
@@ -37,8 +37,8 @@ async def get_user_id(payload: dict[str, Any]) -> UUID:
     return user_id
 
 
-async def get_user_by_id(user_id: UUID) -> Any:
-    user = await users_dao.find_one_or_none_by_id(user_id)
+async def get_user_by_id(user_id: UUID, users_dao: UsersDAO) -> Any:
+    user = await users_dao.get_one_by_id_or_none(user_id)
     if not user:
         raise UserNotFoundException
     return user

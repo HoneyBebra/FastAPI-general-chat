@@ -20,12 +20,12 @@ class BaseDAO:
         result = await self.session.execute(query)
         return result.scalar_one_or_none()
 
-    async def find_one_or_none(self, **filter_by: Any) -> Any | None:
+    async def get_one_or_none(self, **filter_by: Any) -> Any | None:
         query = select(self.model).filter_by(**filter_by)
         result = await self.session.execute(query)
         return result.scalar_one_or_none()
 
-    async def find_all(self, **filter_by: Any) -> Sequence:
+    async def get_all(self, **filter_by: Any) -> Sequence:
         query = select(self.model).filter_by(**filter_by)
         result = await self.session.execute(query)
         return result.scalars().all()  # type: ignore[return-value]

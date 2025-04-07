@@ -24,7 +24,7 @@ router = APIRouter()
 async def register_user(
     user_data: SUserRegister, users_dao: UsersDAO = Depends()
 ) -> SBaseAuthResponse:
-    user = await users_dao.find_one_or_none(email=user_data.email)
+    user = await users_dao.get_one_or_none(email=user_data.email)
     if user:
         raise UserAlreadyExistsException
 

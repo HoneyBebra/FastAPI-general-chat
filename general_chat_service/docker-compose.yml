@@ -8,6 +8,8 @@ services:
     env_file:
       - .env
     build: .
+    # ports:
+    #   - "8000:8000"
 
   nginx-general-chat:
     container_name: nginx-general-chat
