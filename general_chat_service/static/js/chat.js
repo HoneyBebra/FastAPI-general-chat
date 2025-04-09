@@ -1,5 +1,4 @@
 let socket = null;
-let messagePollingInterval = null;
 
 async function logout() {
     try {
